@@ -35,14 +35,14 @@ export default async function RootLayout({
   params,
 }: Readonly<{
   children: React.ReactNode;
-  params: Promise<{ locale: "en" | "ar" }>;
+  params: any;
 }>) {
   // Ensure that the incoming `locale` is valid
   const { locale } = await params;
   const t = await getServerTranslation("mainMeta");
 
   return (
-    <html dir={directionMap[locale]} lang={locale}>
+    <html dir={directionMap[locale as "en" | "ar"]} lang={locale}>
       <body
         // className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         className={`antialiased`}

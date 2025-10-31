@@ -46,11 +46,7 @@ export function FeaturedProjectsSection() {
 
         <div className="w-full grid grid-cols-4 gap-4">
           {projects.map((project, index) => (
-            <ProjectCard
-              project={project}
-              lang={locale}
-              key={`project-${index}`}
-            />
+            <ProjectCard project={project} key={`project-${index}`} />
           ))}
         </div>
       </div>
