@@ -243,7 +243,11 @@ export default function BlogPageComponent({
           }`}
         >
           <div className={`lg:col-span-1 lg:sticky lg:top-24 lg:left-0`}>
-            <BlogSidebar categories={categories} tags={tags} />
+            <BlogSidebar
+              recentArticles={articles.slice(0, 4) ?? []}
+              categories={categories}
+              tags={tags}
+            />
           </div>
 
           <div className="lg:col-span-3 min-h-screen">{renderContent()}</div>

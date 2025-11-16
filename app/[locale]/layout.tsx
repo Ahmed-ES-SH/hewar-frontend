@@ -49,6 +49,45 @@ export default async function RootLayout({
           href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Cairo:wght@400;600;700&display=swap"
           rel="stylesheet"
         />
+
+        {/* Favicons */}
+        <link rel="icon" href="/logo.png" />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="32x32"
+          href="/logo-square.png"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="16x16"
+          href="/logo-square.png"
+        />
+        <link
+          rel="apple-touch-icon"
+          sizes="180x180"
+          href="/apple-touch-icon.png"
+        />
+
+        {/* Structured Data for Google (Organization Logo) */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              url: "https://dcpc.org.sy",
+              logo: "https://dcpc.org.sy  /logo-square.png", // الشعار المربع الجديد (256x256)
+              name: "Dialogue and Civil Peace Center",
+              sameAs: [
+                "https://www.facebook.com/Dialogue-and-Civil-Peace-Center",
+                "https://twitter.com/Dialogue-and-Civil-Peace-Center",
+                "https://www.linkedin.com/company/Dialogue-and-Civil-Peace-Center",
+              ],
+            }),
+          }}
+        />
       </head>
       <body
         // className={`${geistSans.variable} ${geistMono.variable} antialiased`}

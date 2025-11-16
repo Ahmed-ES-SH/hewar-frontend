@@ -74,7 +74,6 @@ export default function ContactPageComponent() {
               </div>
 
               {/* Map */}
-              <MapSection />
             </div>
 
             <div className="flex items-center justify-between max-lg:flex-col max-lg:items-start w-full relative gap-4">
