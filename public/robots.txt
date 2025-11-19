@@ -1,0 +1,16 @@
+# *
+User-agent: *
+Allow: /
+
+# *
+User-agent: *
+Disallow: /dashboard
+Disallow: /forbidden
+Disallow: /login
+
+# Host
+Host: https://dcpc.org.sy
+
+# Sitemaps
+Sitemap: https://dcpc.org.sy/sitemap.xml
+Sitemap: https://dcpc.org.sy/server-sitemap.xml

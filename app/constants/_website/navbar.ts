@@ -1,4 +1,4 @@
-import { FaBlog, FaCommentAlt, FaHome } from "react-icons/fa";
+import { FaBlog, FaHome } from "react-icons/fa";
 import { IoIosInformationCircleOutline } from "react-icons/io";
 import { SiCloudflareworkers } from "react-icons/si";
 import { SlOrganization } from "react-icons/sl";
@@ -13,7 +13,7 @@ export const links = [
   {
     icon: IoIosInformationCircleOutline,
     href: "/about",
-    label: { en: "About", ar: "عن الجمعية" },
+    label: { en: "About", ar: "عن المركز" },
   },
   {
     icon: SiCloudflareworkers,

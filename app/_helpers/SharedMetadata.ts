@@ -31,8 +31,7 @@ export const getSharedMetadata = (title: string, description: string) => ({
   twitter: {
     card: "summary_large_image",
     site: "@CharityPlatform", // يمكن تغييره لاحقًا عند توفر الحساب الرسمي
-    title: "منصة مركز الحوار والسلم الأهلي - جمعية خيرية ",
-    description:
-      "منصة خيرية تهدف إلى تعزيز الحوار والسلم الأهلي ، ودعم المشاريع الإنسانية والتنموية لخدمة المجتمع.",
+    title,
+    description,
   },
 });

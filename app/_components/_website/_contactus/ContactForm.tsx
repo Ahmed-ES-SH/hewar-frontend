@@ -7,6 +7,8 @@ import { motion } from "framer-motion";
 import { FiSend } from "react-icons/fi";
 import { useLocale } from "@/app/_hooks/useLocale";
 import { useTranslation } from "@/app/_hooks/useTranslation";
+import { instance } from "@/app/_helpers/axios";
+import { toast } from "sonner";
 
 export function ContactForm({ disabled = false }) {
   const translations = useTranslation("contact");
@@ -16,7 +18,7 @@ export function ContactForm({ disabled = false }) {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    phone: "",
+    phone_number: "",
     message: "",
   });
 
@@ -29,11 +31,21 @@ export function ContactForm({ disabled = false }) {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitting(true);
-    // Simulate form submission
-    await new Promise((resolve) => setTimeout(resolve, 1500));
-    setIsSubmitting(false);
-    setFormData({ name: "", email: "", phone: "", message: "" });
+    try {
+      setIsSubmitting(true);
+      const response = await instance.post(`/add-contact-message`, formData);
+      if (response.status == 201) {
+        setFormData({ name: "", email: "", phone_number: "", message: "" });
+      }
+    } catch (error: any) {
+      console.log(error);
+      const message =
+        error?.response?.data?.message ||
+        "حدث خطا غير متوقع اثناء ارسال الرسالة الرجاء المحاولة لاحقا .";
+      toast.error(message);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const isRTL = locale === "ar";
@@ -75,9 +87,9 @@ export function ContactForm({ disabled = false }) {
         <motion.input
           whileFocus={{ scale: 1.02 }}
           type="tel"
-          name="phone"
+          name="phone_number"
           placeholder={translations.form.phone}
-          value={formData.phone}
+          value={formData.phone_number}
           onChange={handleChange}
           className="w-full px-4 py-3 ltr:text-left rtl:text-right border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition"
         />

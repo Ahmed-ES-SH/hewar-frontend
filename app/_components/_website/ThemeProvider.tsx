@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { instance } from "@/app/_helpers/axios";
 import LoadingPage from "../_global/LoadingPage";
 import { useAppDispatch } from "@/app/redux/hooks";
-import { setLogoSrc } from "@/app/redux/slices/variablesSlice";
+import { setLogoSrc, setNavText } from "@/app/redux/slices/variablesSlice";
 
 export default function ThemeProvider({
   children,
@@ -17,10 +17,11 @@ export default function ThemeProvider({
   useEffect(() => {
     const fetchColor = async () => {
       try {
-        const res = await instance.get("/variables-data?id=5&limit=4"); // استبدل بالـ API الفعلي
+        const res = await instance.get("/variables-data?id=5&limit=5"); // استبدل بالـ API الفعلي
         const data = res.data.data;
         if (data) {
           dispatch(setLogoSrc(data.column_1));
+          dispatch(setNavText(data.column_4));
           setLogo(data.column_1);
           document.documentElement.style.setProperty(
             "--primary-color",

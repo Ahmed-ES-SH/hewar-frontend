@@ -1,6 +1,6 @@
 {
   "mainMeta": {
-    "title": "Dialogue and Civil Peace Center - Charity Organization",
+    "title": "Dialogue and Civil Peace Center",
     "description": "A charitable platform dedicated to promoting dialogue and civil peace in Syria, supporting humanitarian and development projects that strengthen community cooperation and solidarity."
   },
   "centerBranchesMeta": {
@@ -103,7 +103,8 @@
     },
     "copyright": "All Rights Reserved",
     "privacy": "Privacy Policy",
-    "terms": "Terms of Service"
+    "terms": "Terms of Service",
+    "centerName": "Dialogue and Civil Peace Center"
   },
 
   "nav": {

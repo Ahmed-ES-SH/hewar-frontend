@@ -1,5 +1,4 @@
 "use client";
-import { FaHeart } from "react-icons/fa";
 import { motion } from "framer-motion";
 import { useTranslation } from "@/app/_hooks/useTranslation";
 
@@ -18,7 +17,8 @@ export default function CopyrightFooter() {
           >
             <div className="flex items-center gap-2 text-white">
               <span>
-                © Conveyor {new Date().getFullYear()} Donat, {t.copyright}
+                © Copyright {new Date().getFullYear()} {t.centerName},{" "}
+                {t.copyright}
               </span>
             </div>
             <div className="flex gap-6">

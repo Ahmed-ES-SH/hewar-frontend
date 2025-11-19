@@ -5,14 +5,18 @@ import { FiUpload, FiImage, FiTrash2 } from "react-icons/fi";
 import { Button } from "@/components/ui/button";
 import { VscLoading } from "react-icons/vsc";
 import { instance } from "@/app/_helpers/axios";
+import { getImageSrc, ImageType } from "@/app/_helpers/GlobalHelpers";
 import { toast } from "sonner";
-import { ImageType } from "@/app/_helpers/GlobalHelpers";
+import Img from "../_global/Img";
+import EditNavTextPopup from "./EditNavTextPopup";
 
 const PlatformCustomizer: React.FC = () => {
   const [logo, setLogo] = useState<ImageType | null>(null);
   const [primaryColor, setPrimaryColor] = useState<string>("#3b9797");
   const [secondaryColor, setSecondaryColor] = useState<string>("#4a9782");
   const [updateLoading, setUpdateLoading] = useState(false);
+  const [navText, setNavText] = useState({ en: "", ar: "" });
+  const [open, setOpen] = useState(false);
 
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -22,7 +26,7 @@ const PlatformCustomizer: React.FC = () => {
       const reader = new FileReader();
       reader.onload = (e) => {
         const result = e.target?.result as string;
-        setLogo(result);
+        setLogo(file);
       };
       reader.readAsDataURL(file);
     }
@@ -55,6 +59,7 @@ const PlatformCustomizer: React.FC = () => {
       if (logo instanceof File) formData.append("column_1", logo);
       formData.append("column_2", primaryColor);
       formData.append("column_3", secondaryColor);
+      formData.append("column_4", JSON.stringify(navText));
 
       const response = await instance.post(
         `/update-variables-data?id=5&limit=4`,
@@ -77,12 +82,13 @@ const PlatformCustomizer: React.FC = () => {
   useEffect(() => {
     const fetchCustomizeData = async () => {
       try {
-        const response = await instance.get(`/variables-data?id=5&limit=4`);
+        const response = await instance.get(`/variables-data?id=5&limit=5`);
         if (response.status == 200) {
           const data = response.data.data;
           setLogo(data.column_1);
           setPrimaryColor(data.column_2);
           setSecondaryColor(data.column_3);
+          setNavText(data.column_4 ?? { en: "", ar: "" });
         }
       } catch (error) {
         console.log(error);
@@ -116,8 +122,8 @@ const PlatformCustomizer: React.FC = () => {
               animate={{ scale: 1 }}
               className="relative group"
             >
-              <img
-                src={logo}
+              <Img
+                src={getImageSrc(logo)}
                 alt="شعار المنصة"
                 className="w-32 h-32 object-contain rounded-lg border-2 border-gray-300"
               />
@@ -239,17 +245,32 @@ const PlatformCustomizer: React.FC = () => {
           </div>
         </div>
       </div>
-      <button
-        type="submit"
-        onClick={handleSubmit}
-        className="bg-blue-500 hover:bg-blue-700 w-fit  text-white flex items-center justify-center py-2 lg:px-12 px-3 mt-12 rounded mx-auto"
-      >
-        {updateLoading ? (
-          <VscLoading className="size-6 animate-spin" />
-        ) : (
-          " حفظ"
-        )}
-      </button>
+      <div className="flex items-center gap-3">
+        <button
+          type="submit"
+          onClick={handleSubmit}
+          className="bg-blue-500 hover:bg-blue-700 w-fit  text-white flex items-center justify-center py-2 lg:px-12 px-3 mt-12 rounded"
+        >
+          {updateLoading ? (
+            <VscLoading className="size-6 animate-spin" />
+          ) : (
+            " حفظ"
+          )}
+        </button>
+        <button
+          onClick={() => setOpen(true)}
+          className="text-white flex items-center justify-center py-2 lg:px-12 px-3 mt-12 rounded bg-green-500 hover:bg-green-700"
+        >
+          تعديل النص فى شريط التنقل
+        </button>
+      </div>
+
+      <EditNavTextPopup
+        isOpen={open}
+        initialValue={navText}
+        onClose={() => setOpen(false)}
+        onSave={(value) => setNavText(value)}
+      />
     </motion.div>
   );
 };

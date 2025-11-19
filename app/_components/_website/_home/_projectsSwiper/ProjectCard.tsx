@@ -38,7 +38,7 @@ export default function ProjectCard({ project, locale }: props) {
           key={isHovered ? "hover" : "default"}
           src={getImageSource()}
           alt={project.title}
-          className="w-full h-full object-cover"
+          className=" absolute top-0 left-0 w-full h-full"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}

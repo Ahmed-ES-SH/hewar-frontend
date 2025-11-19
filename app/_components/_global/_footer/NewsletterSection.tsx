@@ -7,9 +7,9 @@ export default function NewsletterSection() {
   const t = useTranslation("footer");
   return (
     <>
-      <div className="border-b-black/10 border-b">
-        <div className="container mx-auto px-4 py-12">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+      <div className="border-b-black/10 w-fit ml-auto border-b">
+        <div className=" px-4 py-12">
+          <div className="grid grid-cols-1  gap-8 items-center">
             <div className="space-y-4">
               <motion.h3
                 initial={{ opacity: 0, y: 20 }}
@@ -36,7 +36,7 @@ export default function NewsletterSection() {
                 <input
                   type="email"
                   placeholder={t.newsletter.placeholder}
-                  className="px-4 py-3 duration-300 bg-[#8ABB6C]  placeholder:text-white focus:placeholder:text-black text-white border border-primary-color rounded-lg focus:outline-none focus:bg-white focus:text-black focus:ring-2 focus:ring-[#8ABB6C] flex-1"
+                  className="px-4 py-3 duration-300 bg-white  placeholder:text-black placeholder:opacity-20 focus:placeholder:text-white text-white border border-primary-color rounded-lg focus:outline-none focus:bg-white focus:text-black focus:ring-2 focus:ring-[#8ABB6C] flex-1"
                 />
                 <motion.button
                   whileHover={{ scale: 1.05 }}

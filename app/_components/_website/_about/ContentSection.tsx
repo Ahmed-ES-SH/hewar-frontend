@@ -40,21 +40,22 @@ export default function AboutContentSection({
       variants={fadeInUp}
       className={`flex ${
         reverse ? "flex-row" : "flex-row-reverse"
-      } max-lg:flex-col max-lg:items-start gap-12 items-center mb-24`}
+      } max-lg:flex-col max-lg:items-start gap-12 items-center pb-3  mb-24`}
     >
       {/* Image */}
       <motion.div
         variants={reverse ? slideInRight : slideInLeft}
         className="rounded-2xl  relative w-full lg:w-1/2"
       >
-        <div className="w-full  max-h-[550px] z-6 relative bg-white rounded-xl p-4 border-gray-200 shadow">
+        <div className="w-full  max-h-[550px] max-lg:h-auto z-6 relative bg-white rounded-xl p-4 border-gray-200 shadow">
           <Img
-            src={image}
+            src={image ?? "/noImage.png"}
+            errorSrc="/noImage.png"
             alt={title}
-            className="w-[90%] h-[530px] object-cover"
+            className="w-full h-[530px] max-lg:h-auto object-cover rounded-xl"
           />
         </div>
-        <div className="w-full h-full bg-primary-color border border-green-500 shadow absolute -top-12 rounded-xl z-4 ltr:-left-4 rtl:-right-4"></div>
+        <div className="w-full h-full bg-primary-color border border-primary-color shadow absolute lg:-top-12 -top-4 rounded-xl z-4 ltr:-left-4 rtl:-right-4"></div>
       </motion.div>
 
       {/* Text */}
@@ -62,7 +63,7 @@ export default function AboutContentSection({
         variants={reverse ? slideInLeft : slideInRight}
         className="space-y-4 w-full lg:w-1/2"
       >
-        <h2 className="text-4xl font-bold text-gray-900">{title}</h2>
+        <h2 className="lg:text-4xl text-xl font-bold text-gray-900">{title}</h2>
         <p className="text-lg text-gray-700 leading-relaxed">{desc}</p>
       </motion.div>
     </motion.section>

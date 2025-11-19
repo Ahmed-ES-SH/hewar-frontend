@@ -173,21 +173,21 @@ export default function FooterLinks() {
               transition={{ duration: 0.3 }}
             >
               <div className="flex items-center justify-between pb-2 border-b border-primary-color">
-                <h2 className="text-lg font-semibold mb-3 text-primary-color">
+                <h2 className="text-lg  font-semibold mb-3 text-white">
                   {list.title}
                 </h2>
                 <div
                   onClick={() => onAdd(list.id)}
-                  className="bg-primary-color text-white hover:text-black p-1 rounded-sm hover:bg-white hover:border-primary-color btn-hover"
+                  className="bg-primary-color cursor-pointer duration-200 text-white hover:text-black p-1 rounded-sm hover:bg-white hover:border-primary-color btn-hover"
                 >
                   <FaPlus className="size-5" />
                 </div>
               </div>
-              <ul className="space-y-2 mt-3">
+              <ul dir="ltr" className="space-y-2 mt-3">
                 {list.links.map((link: linkType) => (
                   <motion.li
                     key={link.id}
-                    className="flex justify-between duration-300 items-center p-2 rounded-lg shadow-sm bg-secondery_dash text-second_text"
+                    className="flex w-full justify-between duration-300 items-center p-2 rounded-lg shadow-sm bg-secondery_dash text-second_text"
                     whileHover={{ scale: 1.02 }}
                   >
                     <div
@@ -196,7 +196,7 @@ export default function FooterLinks() {
                     >
                       {link.link_title_en} / {link.link_title_ar}
                     </div>
-                    <div className="flex gap-3">
+                    <div className="flex  gap-3">
                       <button
                         onClick={() => onEdit(link)}
                         className="text-blue-500 hover:text-blue-600 cursor-pointer"

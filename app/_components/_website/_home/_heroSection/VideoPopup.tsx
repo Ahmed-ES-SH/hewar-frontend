@@ -81,7 +81,8 @@ export default function VideoPopup({
             <div className="w-full aspect-video">
               {videoType === "youtube" && youtubeVideoId && (
                 <iframe
-                  src={`https://www.youtube.com/embed/${youtubeVideoId}`}
+                  src={`https://www.youtube.com/embed/${youtubeVideoId}?rel=0&modestbranding=1&enablejsapi=1`}
+                  referrerPolicy="strict-origin-when-cross-origin"
                   title="YouTube video player"
                   frameBorder="0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"

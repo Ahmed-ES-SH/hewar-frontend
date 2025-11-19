@@ -3,12 +3,12 @@ import LocaleLink from "../LocaleLink";
 import { useLocale } from "@/app/_hooks/useLocale";
 import { usePathname } from "next/navigation";
 import { IoMdHeart } from "react-icons/io";
+import { useAppSelector } from "@/app/redux/hooks";
+import { links } from "@/app/constants/_website/navbar";
+import { toast } from "sonner";
+import MobileDropLinks from "./MobileDropLinks";
 import LanguageBtn from "./LanguageBtn";
 import Img from "../Img";
-import { links } from "@/app/constants/_website/navbar";
-import MobileDropLinks from "./MobileDropLinks";
-import { useAppSelector } from "@/app/redux/hooks";
-import { toast } from "sonner";
 
 interface props {
   hideWhitePart: boolean;
@@ -17,7 +17,7 @@ interface props {
 export default function BottomNavbar({ hideWhitePart }: props) {
   const locale = useLocale();
   const pathName = usePathname();
-  const { logoSrc } = useAppSelector((state) => state.variables);
+  const { logoSrc, navText } = useAppSelector((state) => state.variables);
 
   const donateNow = () => {
     toast.warning("عفوا ستكون هذة الميزة متاحه قريبا انشاء الله .");
@@ -25,7 +25,7 @@ export default function BottomNavbar({ hideWhitePart }: props) {
 
   return (
     <div
-      className={`md:c-container w-full rounded-full  md:absolute ${
+      className={`md:c-container overflow-hidden w-full rounded-full  md:absolute ${
         !hideWhitePart ? "md:top-[95%]" : "md:top-1/2"
       } md:left-1/2 md:-translate-x-1/2 flex items-start justify-between gap-2`}
     >
@@ -40,7 +40,7 @@ export default function BottomNavbar({ hideWhitePart }: props) {
         </div>
 
         {/* current links desktop */}
-        <div className="md:flex hidden items-center self-start gap-4">
+        <div className="md:flex shrink-0 hidden items-center self-start gap-4">
           {links.map((link, index) => {
             const isActive = link.href !== "/" && pathName.includes(link.href);
             return (
@@ -58,10 +58,8 @@ export default function BottomNavbar({ hideWhitePart }: props) {
           })}
         </div>
         {/* message */}
-        <p className="text-white hidden 2xl:block">
-          {locale == "en"
-            ? "Welcome to CDCD Are you ready to help them? Let’s become avolunteers..."
-            : "أهلاً بكم في CDCD. هل أنتم مستعدون لمساعدتهم؟ هيا بنا نصبح متطوعين..."}
+        <p className="text-white hidden   2xl:block whitespace-nowrap">
+          {navText[locale] ?? ""}
         </p>
       </div>
       <div className="flex items-center gap-2">

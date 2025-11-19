@@ -1,17 +1,16 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import NavDiv from "./_navbar/NavDiv";
-import Img from "./Img";
 import { FaFacebook, FaLinkedin, FaTiktok, FaYoutube } from "react-icons/fa";
-import LocaleLink from "./LocaleLink";
-import BottomNavbar from "./_navbar/BottomNavbar";
 import { motion, AnimatePresence } from "framer-motion";
 import { useLocale } from "@/app/_hooks/useLocale";
 import { useAppSelector } from "@/app/redux/hooks";
 import { Location } from "../_dashboard/_CenterBranches/types";
 import { TextType } from "../_dashboard/_homePage/_aboutSectionDash/AboutSectionDash";
-import { toast } from "sonner";
+import BottomNavbar from "./_navbar/BottomNavbar";
+import NavDiv from "./_navbar/NavDiv";
+import LocaleLink from "./LocaleLink";
+import Img from "./Img";
 
 interface props {
   socialData: {

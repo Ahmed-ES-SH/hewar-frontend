@@ -11,16 +11,6 @@ import ThemeProvider from "../_components/_website/ThemeProvider";
 import FetchData from "../_helpers/FetchData";
 import { getServerTranslation } from "../_helpers/serverTranslation";
 
-// const geistSans = Geist({
-//   variable: "--font-geist-sans",
-//   subsets: ["latin"],
-// });
-
-// const geistMono = Geist_Mono({
-//   variable: "--font-geist-mono",
-//   subsets: ["latin"],
-// });
-
 export async function generateMetadata() {
   const t = await getServerTranslation("ar", "mainMeta");
   const sharedMetadata = await getSharedMetadata(t.title, t.description);
@@ -78,7 +68,7 @@ export default async function RootLayout({
               "@context": "https://schema.org",
               "@type": "Organization",
               url: "https://dcpc.org.sy",
-              logo: "https://dcpc.org.sy  /logo-square.png", // الشعار المربع الجديد (256x256)
+              logo: "https://dcpc.org.sy/logo-square.png", // الشعار المربع الجديد (256x256)
               name: "Dialogue and Civil Peace Center",
               sameAs: [
                 "https://www.facebook.com/Dialogue-and-Civil-Peace-Center",
@@ -102,7 +92,7 @@ export default async function RootLayout({
                 {children}
                 <ScrollToTop />
               </div>
-              <Footer />
+              <Footer socialData={socialData} />
             </ClientLayout>
           </ThemeProvider>
         </ReduxProvider>
