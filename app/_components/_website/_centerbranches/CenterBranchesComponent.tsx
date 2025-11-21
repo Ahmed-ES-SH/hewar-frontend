@@ -7,6 +7,7 @@ import CenterBranch from "./CenterBranch";
 
 export interface CenterBranchType {
   id: number;
+  title: string;
   email: string;
   phone: string;
   location: {

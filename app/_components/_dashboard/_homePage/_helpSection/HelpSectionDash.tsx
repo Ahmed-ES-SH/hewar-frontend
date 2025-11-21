@@ -173,10 +173,9 @@ export default function HelpSectionDash({
       formData.append(`column_2`, JSON.stringify(helpData.stats));
       if (videoData.imgSrc instanceof File)
         formData.append(`column_3`, videoData.imgSrc);
-      if (videoData.videoPath instanceof File)
-        formData.append(`column_4`, videoData.videoPath);
+      if (videoData.videoPath) formData.append(`column_4`, videoData.videoPath);
       const response = await instance.post(
-        `/update-variables-data?id=3&limit=5`,
+        `/update-variables-data?id=3&limit=6`,
         formData
       );
       if (response.status == 200) {

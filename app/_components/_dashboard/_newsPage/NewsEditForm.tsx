@@ -6,6 +6,10 @@ import { ImageUpload } from "../_ProjectPage/ImageUpload";
 import { ArticleType } from "../_articles/types";
 import { Category } from "../_ProjectPage/type";
 import KeywordsInput from "./KeywordsInput";
+import { instance } from "@/app/_helpers/axios";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
+import { VscLoading } from "react-icons/vsc";
 
 interface NewsEditFormProps {
   newsData: ArticleType;
@@ -120,10 +124,61 @@ const SelectField = ({
 
 // المكون الرئيسي لتعديل المقال
 const NewsEditForm = ({ newsData, categories }: NewsEditFormProps) => {
+  const router = useRouter();
+
   const [formData, setFormData] = useState<ArticleType>(newsData);
   const [keywords, setKeywords] = useState<string[]>(newsData.meta_keywords);
+  const [loading, setLoading] = useState(false);
 
-  const handleSave = () => {};
+  const handleSave = async () => {
+    try {
+      setLoading(true);
+      const updatedData = new FormData();
+      Object.entries(formData).forEach(([key, value]) => {
+        if (
+          key == "image" ||
+          key == "scheduled_for" ||
+          key == "meta_keywords"
+        ) {
+          return;
+        }
+
+        if (typeof value === "boolean") {
+          updatedData.append(key, value ? "1" : "0");
+          return;
+        }
+
+        updatedData.append(key, value as any);
+      });
+
+      if ((formData.image as any) instanceof File)
+        updatedData.append("image", formData.image);
+
+      if (formData.scheduled_for)
+        updatedData.append("scheduled_for", formData.scheduled_for);
+
+      if (keywords && keywords.length > 0) {
+        updatedData.append("meta_keywords", JSON.stringify(keywords));
+      }
+
+      const response = await instance.post(
+        `/update-news/${newsData.id}`,
+        updatedData
+      );
+      if (response.status == 200) {
+        toast.success("تم تحديث بيانات المقال بنجاح .");
+        router.push(`/en/dashboard/news`);
+      }
+    } catch (error: any) {
+      console.log(error);
+      const message =
+        error?.response?.data?.message ??
+        "حدث خطا اثناء محاولة تحديث بيانات المقال الرجاء المحاولة لاحقا .";
+      toast.error(message);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const updateField = (field: keyof ArticleType, value: any) => {
     setFormData((prev) => ({
@@ -163,10 +218,16 @@ const NewsEditForm = ({ newsData, categories }: NewsEditFormProps) => {
         <h2 className="text-2xl font-bold text-gray-800">تعديل المقال</h2>
         <button
           onClick={handleSave}
-          className="flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+          className="flex items-center justify-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
         >
-          <FiSave className="ml-2" />
-          حفظ التغييرات
+          {loading ? (
+            <VscLoading className="animate-spin" />
+          ) : (
+            <div className="flex items-center gap-1">
+              <FiSave className="ml-2" />
+              حفظ التغييرات
+            </div>
+          )}
         </button>
       </div>
 
@@ -310,20 +371,24 @@ const NewsEditForm = ({ newsData, categories }: NewsEditFormProps) => {
             <InputField
               label="تاريخ النشر"
               value={formData.published_at.slice(0, 16)}
-              onChange={(value) => updateField("published_at", value)}
+              onChange={(value) => updateField("created_at", value)}
               type="datetime-local"
             />
 
-            <InputField
-              label="الجدولة (اختياري)"
-              value={
-                formData.scheduled_for
-                  ? formData.scheduled_for.slice(0, 16)
-                  : ""
-              }
-              onChange={(value) => updateField("scheduled_for", value || null)}
-              type="datetime-local"
-            />
+            {formData.scheduled_for && (
+              <InputField
+                label="الجدولة (اختياري)"
+                value={
+                  formData.scheduled_for
+                    ? formData.scheduled_for.slice(0, 16)
+                    : ""
+                }
+                onChange={(value) =>
+                  updateField("scheduled_for", value || null)
+                }
+                type="datetime-local"
+              />
+            )}
           </motion.div>
 
           {/* الإحصائيات */}

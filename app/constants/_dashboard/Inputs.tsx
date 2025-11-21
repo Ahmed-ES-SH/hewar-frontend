@@ -8,6 +8,7 @@ import {
   FaSnapchat,
   FaEnvelope,
 } from "react-icons/fa";
+import { TbBrandOffice } from "react-icons/tb";
 
 export const addUserinputs = [
   {
@@ -107,50 +108,65 @@ export const UpdateUserinputs = [
 export const socialContactInfoInputs = [
   {
     name: "whatsapp_number",
+    label: "رقم الواتساب",
     icon: <FaWhatsapp className="text-green-500 text-xl" />,
     placeholder: "WhatsApp Number",
     type: "text",
   },
   {
     name: "gmail_account",
+    label: "حساب Gmail",
     icon: <FaEnvelope className="text-red-500 text-xl" />,
     placeholder: "Gmail Account",
     type: "email",
   },
   {
+    name: "official_email",
+    label: "البريد الرسمي",
+    icon: <TbBrandOffice className="text-red-500 text-xl" />,
+    placeholder: "Official Email",
+    type: "email",
+  },
+  {
     name: "facebook_account",
+    label: "رابط حساب فيسبوك",
     icon: <FaFacebook className="text-blue-700 text-xl" />,
     placeholder: "Facebook Account URL",
     type: "text",
   },
   {
     name: "x_account",
+    label: "رابط حساب X",
     icon: <FaTwitter className="text-blue-400 text-xl" />,
     placeholder: "X (Twitter) Account URL",
     type: "text",
   },
   {
     name: "youtube_account",
+    label: "رابط قناة يوتيوب",
     icon: <FaYoutube className="text-red-600 text-xl" />,
     placeholder: "YouTube Account URL",
     type: "text",
   },
   {
     name: "instgram_account",
+    label: "رابط حساب إنستغرام",
     icon: <FaInstagram className="text-pink-500 text-xl" />,
     placeholder: "Instagram Account URL",
     type: "text",
   },
   {
     name: "snapchat_account",
+    label: "رابط حساب سناب شات",
     icon: <FaSnapchat className="text-yellow-500 text-xl" />,
     placeholder: "Snapchat Account URL",
     type: "text",
   },
   {
     name: "tiktok_account",
+    label: "رابط حساب تيك توك",
     icon: <IoLogoTiktok className="text-black text-xl" />,
-    placeholder: "tik tok Account URL",
+    placeholder: "TikTok Account URL",
     type: "text",
   },
 ];

@@ -36,12 +36,12 @@ export default function MobileDropLinks() {
       <button
         onClick={() => setIsOpen(!isOpen)}
         aria-label="Toggle Menu"
-        className=" rounded-md text-stone-700 hover:bg-stone-100 transition"
+        className="rounded-md text-stone-700 hover:bg-stone-100 transition"
       >
         {isOpen ? (
-          <IoMdClose className="size-8" />
+          <IoMdClose className="size-8 pt-2" />
         ) : (
-          <IoMdMenu className="size-8" />
+          <IoMdMenu className="size-8 pt-2" />
         )}
       </button>
 

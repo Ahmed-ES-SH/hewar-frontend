@@ -6,6 +6,7 @@ export type Location = {
 
 export type Branch = {
   id: number;
+  title: string;
   email: string;
   phone: string;
   location: Location;

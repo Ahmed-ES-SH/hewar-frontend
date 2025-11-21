@@ -11,6 +11,7 @@ type Props = {
   onCancel: () => void;
   formLoading: boolean;
   onSubmit: (payload: {
+    title: string;
     email: string;
     phone: string;
     location: Location;
@@ -23,6 +24,7 @@ export const BranchForm: React.FC<Props> = ({
   onSubmit,
   formLoading,
 }) => {
+  const [title, setTitle] = useState(initial.title ?? "");
   const [email, setEmail] = useState(initial.email ?? "");
   const [phone, setPhone] = useState(initial.phone ?? "");
   const [location, setLocation] = useState<Location>(
@@ -48,7 +50,7 @@ export const BranchForm: React.FC<Props> = ({
     if (!validate()) return;
     setLoading(true);
     try {
-      await onSubmit({ email, phone, location });
+      await onSubmit({ title, email, phone, location });
     } finally {
       setLoading(false);
     }
@@ -61,6 +63,22 @@ export const BranchForm: React.FC<Props> = ({
   return (
     <>
       <form onSubmit={handleSubmit} className="space-y-4">
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1">
+            الاسم الخاص بالفرع
+          </label>
+          <Input
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            type="text"
+            placeholder="الاسم الخاص بالفرع ..."
+            className={errors.title ? "border-red-500" : ""}
+          />
+          {errors.title && (
+            <p className="text-red-600 text-sm mt-1">{errors.title}</p>
+          )}
+        </div>
+
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">
             البريد الرسمى

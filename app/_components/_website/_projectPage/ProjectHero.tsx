@@ -89,13 +89,13 @@ export default function ProjectHero({ project }: HeroProps) {
           <Button size="lg" className="bg-primary-color hover:bg-green-500">
             {t.hero.donateNow}
           </Button>
-          <Button
+          {/* <Button
             size="lg"
             variant="outline"
             className="border-white text-white hover:bg-light-primary-color hover:text-white duration-300 bg-transparent"
           >
             {t.hero.learnMore}
-          </Button>
+          </Button> */}
         </motion.div>
       </motion.div>
     </section>

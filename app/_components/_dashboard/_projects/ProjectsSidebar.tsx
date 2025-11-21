@@ -92,7 +92,7 @@ const ProjectsSidebar = ({
       initial={{ opacity: 0, x: -20 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ duration: 0.3 }}
-      className="w-80  shadow-md border rounded-xl  bg-white border-r border-gray-200 h-screen flex flex-col"
+      className="w-80 max-md:w-full  shadow-md border rounded-xl  bg-white border-r border-gray-200 h-screen flex flex-col"
     >
       {/* Header */}
       <div className="p-6 border-b border-gray-200">

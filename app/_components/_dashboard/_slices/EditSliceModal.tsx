@@ -282,26 +282,7 @@ export default function EditSliceModal({
 
                       <div className="flex items-center gap-2">
                         <div className="flex-1 border-t border-gray-300"></div>
-                        <span className="text-xs text-gray-500">أو</span>
                         <div className="flex-1 border-t border-gray-300"></div>
-                      </div>
-
-                      <div>
-                        <label className="block text-xs text-gray-600 mb-2">
-                          رفع ملف فيديو
-                        </label>
-                        <label className="flex items-center justify-center gap-2 px-4 py-3 border-2 border-dashed min-h-[20vh] border-gray-300 rounded-lg hover:border-blue-500 hover:bg-blue-50 transition-all cursor-pointer">
-                          <FiVideo className="text-gray-500" size={20} />
-                          <span className="text-sm text-gray-600">
-                            اختر ملف فيديو
-                          </span>
-                          <input
-                            type="file"
-                            accept="video/*"
-                            onChange={handleVideoFileChange}
-                            className="hidden"
-                          />
-                        </label>
                       </div>
                     </div>
                   )}

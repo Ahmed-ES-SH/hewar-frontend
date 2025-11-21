@@ -36,6 +36,9 @@ export default function HelpSection({ data }: props) {
 
   const { texts, stats, image_path, video_path } = data;
 
+  console.log(video_path);
+  console.log(data);
+
   return (
     <section className="bg-primary-color text-white relative overflow-hidden py-16 px-6 md:px-12">
       <div className="max-w-7xl mx-auto grid md:grid-cols-2 items-center gap-10">

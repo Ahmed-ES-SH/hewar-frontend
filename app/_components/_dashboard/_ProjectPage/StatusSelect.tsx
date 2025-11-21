@@ -23,12 +23,31 @@ export const StatusSelect: React.FC<StatusSelectProps> = ({
   onChange,
   error,
 }) => {
+  // 🟢 تم إضافة حالتي 'draft' و 'rejected'
   const statusOptions: StatusOption[] = [
+    {
+      value: "draft", // الحالة الجديدة: مسودة
+      label: "مسودة",
+      color: "text-gray-700",
+      bgColor: "bg-gray-100",
+    },
     {
       value: "pending",
       label: "قيد الانتظار",
       color: "text-yellow-800",
       bgColor: "bg-yellow-100",
+    },
+    {
+      value: "approved", // الحالة المفقودة في الكود الأصلي، لكنها في قائمة الحالات المتاحة
+      label: "موافق عليه",
+      color: "text-green-600",
+      bgColor: "bg-green-100",
+    },
+    {
+      value: "rejected", // الحالة الجديدة: مرفوض
+      label: "مرفوض",
+      color: "text-red-900", // لون أحمر غامق للرفض
+      bgColor: "bg-red-200", // خلفية حمراء أغمق
     },
     {
       value: "in_progress",
@@ -60,7 +79,8 @@ export const StatusSelect: React.FC<StatusSelectProps> = ({
         حالة المشروع <span className="text-red-500">*</span>
       </label>
 
-      <div className="grid grid-cols-2 gap-3">
+      {/* تم تغيير grid-cols-2 إلى grid-cols-3 لاستيعاب 7 خيارات بشكل أفضل (2x3 + 1 أو 3x3) */}
+      <div className="grid grid-cols-3 gap-3">
         {statusOptions.map((option) => (
           <motion.button
             key={option.value}

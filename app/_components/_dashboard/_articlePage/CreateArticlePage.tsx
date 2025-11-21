@@ -15,12 +15,25 @@ import { useRouter } from "next/navigation";
 
 interface CreateArticlePageProps {
   categories: Category[];
+  type: "news" | "article";
 }
 
 export default function CreateArticlePage({
   categories,
+  type,
 }: CreateArticlePageProps) {
   const router = useRouter();
+
+  const typeBadge = {
+    news: {
+      label: "خبر",
+      className: "bg-red-100 text-red-700 border border-red-300",
+    },
+    article: {
+      label: "مقال",
+      className: "bg-green-100 text-green-700 border border-green-300",
+    },
+  };
 
   const [formData, setFormData] = useState<ArticleFormData>({
     title: "",
@@ -77,11 +90,15 @@ export default function CreateArticlePage({
         data.append("meta_keywords", JSON.stringify(formData.meta_keywords));
       }
 
-      const response = await instance.post("/add-article", data);
+      const endPoint = type == "article" ? "/add-article" : "/add-news";
+      const direct =
+        type == "article" ? `/en/dashboard/articles` : `/en/dashboard/news`;
+
+      const response = await instance.post(endPoint, data);
 
       if (response.status === 200 || response.status === 201) {
         toast.success("تم إضافة المقال بنجاح ✅");
-        router.push(`/en/dashboard/articles`);
+        router.push(direct);
       }
     } catch (error: any) {
       console.log(error);
@@ -123,9 +140,18 @@ export default function CreateArticlePage({
         >
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-2xl font-bold text-gray-900">
-                إضافة مقال جديد
-              </h1>
+              <div className="flex items-center gap-3">
+                <h1 className="text-2xl font-bold text-gray-900">
+                  {type === "news" ? "إضافة خبر جديد" : "إضافة مقال جديد"}
+                </h1>
+
+                {/* Badge */}
+                <span
+                  className={`px-3 py-1 text-sm font-medium rounded-full ${typeBadge[type].className}`}
+                >
+                  {typeBadge[type].label}
+                </span>
+              </div>
               <p className="text-gray-600">قم بإدخال تفاصيل المقال الجديد.</p>
             </div>
 

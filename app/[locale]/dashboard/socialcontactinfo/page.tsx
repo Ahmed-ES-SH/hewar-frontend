@@ -20,7 +20,14 @@ interface dataType {
   x_account: string | null; // Twitter (X)
   youtube_account: string | null;
   gmail_account: string | null;
+  official_email: string | null;
   whatsapp_number: string | null;
+  address: string | null;
+  location: {
+    address: string;
+    lat: number;
+    lng: number;
+  };
   created_at: string; // ISO date string
   updated_at: string; // ISO date string
 }
@@ -31,7 +38,7 @@ export default function EditSocialContactInfo() {
     false
   );
 
-  const [accounts, setAccounts] = useState({});
+  const [accounts, setAccounts] = useState<Partial<dataType>>({});
   const [updateloading, setUpdateloading] = useState(false);
   const [location, setLocation] = useState<Location | null>(null);
   const [showMap, setShowMap] = useState(false);
@@ -56,9 +63,18 @@ export default function EditSocialContactInfo() {
 
     setUpdateloading(true);
     try {
+      const formData = new FormData();
+      Object.entries(accounts).forEach(([key, value]) => {
+        if (key == "location") return;
+        formData.append(key, value as string);
+      });
+
+      if (accounts.location)
+        formData.append("location", JSON.stringify(accounts.location));
+
       const response = await instance.post(
         "/update-social-contact-info",
-        accounts
+        formData
       );
       if (response.status === 200) {
         toast.success("تم تعديل روابط التواصل بنجاح");
@@ -93,15 +109,17 @@ export default function EditSocialContactInfo() {
 
   if (loading) return <LoadingSpin />;
 
+  console.log(accounts);
+
   return (
     <div
-      style={{ direction: "ltr" }}
-      className="w-full h-[90vh]  my-3 flex items-center justify-center"
+      style={{ direction: "rtl" }}
+      className="w-full min-h-[90vh]  my-3 flex items-center justify-center"
     >
-      <div className="max-md:w-[97%] min-w-[60%] h-fit mx-auto p-6 bg-white shadow-2xl border border-gray-300 rounded-lg">
+      <div className="w-5xl h-fit  p-6 bg-white shadow-2xl border border-gray-300 rounded-lg">
         <motion.div
           style={{ direction: "rtl" }}
-          className="text-center mb-6"
+          className="text-center w-full mb-6"
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
@@ -111,30 +129,38 @@ export default function EditSocialContactInfo() {
             قم بتحديث حسابات الوسائط الاجتماعية المرتبطة بموقعك.
           </p>
         </motion.div>
-        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+        <form onSubmit={handleSubmit} className="flex flex-col w-full gap-4">
           {socialContactInfoInputs.map((input, index) => (
-            <div key={index} className="flex items-center gap-3">
-              {input.icon}
+            <div key={index} className="flex flex-col gap-3 items-start w-full">
+              <div className="flex items-center gap-2 pb-2 border-b border-gray-300">
+                {input.icon}
+                <label className="mb-1 text-sm font-medium text-gray-700">
+                  {input.label}
+                </label>
+              </div>
+
               <input
                 type={input.type}
                 name={input.name}
                 value={accounts[input.name as keyof typeof data] || ""}
                 onChange={handleInputChange}
                 placeholder={input.placeholder}
-                className="input-style"
+                className="input-style w-full"
               />
             </div>
           ))}
-          <div className="flex items-center gap-3">
+
+          <div className="flex items-center gap-2 pb-2 border-b border-gray-300 w-fit">
             <FaMapLocation className="text-green-400 size-6" />
-            <input
-              type="text"
-              name={"address"}
-              value={location?.address ?? ""}
-              className="input-style"
-              disabled
-            />
+            <p>نص العنوان</p>
           </div>
+          <input
+            type="text"
+            name="address"
+            onChange={handleInputChange}
+            value={accounts?.address ?? ""}
+            className="input-style"
+          />
 
           <div className="text-center mt-6">
             <div className="flex items-center w-fit mx-auto gap-3">
@@ -150,13 +176,13 @@ export default function EditSocialContactInfo() {
                   "حفظ التغييرات"
                 )}
               </motion.button>
-              <motion.button
+              {/* <motion.button
                 type="button"
                 onClick={() => setShowMap(true)}
                 className="px-6 py-2 bg-green-600 text-white font-bold w-fit mx-auto flex items-center justify-center rounded-lg hover:bg-green-700 transition duration-300"
               >
                 تعديل العنوان
-              </motion.button>
+              </motion.button> */}
             </div>
           </div>
         </form>

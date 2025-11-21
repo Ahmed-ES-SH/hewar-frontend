@@ -29,6 +29,7 @@ export default function CenterBranchesControl({ branchesData }: props) {
   const [selectedBranch, setSelectedBranch] = useState<Branch | null>(null);
 
   const createBranch = async (payload: {
+    title: string;
     email: string;
     phone: string;
     location: any;
@@ -50,6 +51,7 @@ export default function CenterBranchesControl({ branchesData }: props) {
   };
 
   const updateBranch = async (payload: {
+    title: string;
     email: string;
     phone: string;
     location: any;
@@ -130,6 +132,9 @@ export default function CenterBranchesControl({ branchesData }: props) {
               exit={{ opacity: 0, y: -10 }}
             >
               <Card className="px-3 h-full">
+                <h1 className="w-full pb-2 border-b border-gray-300">
+                  {b?.title ?? ""}
+                </h1>
                 <div className="flex justify-between">
                   <div>
                     <h3 className="text-lg font-medium">
@@ -169,7 +174,6 @@ export default function CenterBranchesControl({ branchesData }: props) {
       </div>
 
       {/* Create modal */}
-      {/* Create modal */}
       <Modal
         show={showCreate}
         onClose={() => setShowCreate(false)}
@@ -182,7 +186,6 @@ export default function CenterBranchesControl({ branchesData }: props) {
         />
       </Modal>
 
-      {/* Edit modal */}
       {/* Edit modal */}
       <Modal
         show={showEditModal}

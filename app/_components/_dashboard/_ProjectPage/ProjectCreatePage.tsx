@@ -6,12 +6,14 @@ import { instance } from "@/app/_helpers/axios";
 import { toast } from "sonner";
 import FormRightSide from "./FormRightSide";
 import FormLeftSide from "./FormLeftSide";
+import { useRouter } from "next/navigation";
 
 interface props {
   categories: Category[];
 }
 
 export default function ProjectCreatePage({ categories }: props) {
+  const router = useRouter();
   const [project, setProject] = useState<Partial<Project>>({
     id: 0,
     title: "",
@@ -66,6 +68,8 @@ export default function ProjectCreatePage({ categories }: props) {
 
         if (value === null || value === undefined) return;
 
+        if (key == "image") return;
+
         // تحويل Boolean إلى 1/0
         if (typeof value === "boolean") {
           formData.append(key, value ? "1" : "0");
@@ -98,12 +102,16 @@ export default function ProjectCreatePage({ categories }: props) {
 
       if (location) formData.append("location", JSON.stringify(location));
 
+      if ((project?.image as any) instanceof File)
+        formData.append("image", project.image as any);
+
       // إرسال POST لإنشاء مشروع جديد
       const response = await instance.post("/add-project", formData);
 
-      if (response.status === 200 || response.status === 201) {
+      if (response.status === 201) {
         toast.success("تم إنشاء المشروع بنجاح ✅");
         setProject(response.data.data);
+        router.push(`/en/dashboard/projects`);
       }
     } catch (error: any) {
       console.error("Error creating project:", error);
@@ -122,6 +130,8 @@ export default function ProjectCreatePage({ categories }: props) {
       transition: { staggerChildren: 0.1 },
     },
   };
+
+  console.log(project);
 
   return (
     <div className="min-h-screen bg-gray-50 py-8">

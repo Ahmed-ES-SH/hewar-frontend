@@ -7,8 +7,6 @@ export default async function HelpDashSection() {
 
   const { column_1, column_2, column_3, column_4 } = await data;
 
-  console.log(data);
-
   return (
     <HelpSectionDash
       headData={column_1}

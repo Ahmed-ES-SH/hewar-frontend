@@ -17,8 +17,10 @@ interface props {
     gmail_account: string;
     location: Location;
     whatsapp_number: string;
+    address: string;
     facebook_account: string;
     x_account: string;
+    official_email: string;
     youtube_account: string;
     instgram_account: string;
     snapchat_account: string;
@@ -63,7 +65,7 @@ export default function Navbar({ socialData }: props) {
             en: "Locate Address:",
             ar: "العنوان:",
           },
-          value: socialData?.location?.address,
+          value: socialData?.address,
         },
         {
           title: {
@@ -77,7 +79,7 @@ export default function Navbar({ socialData }: props) {
             en: "Email us any time:",
             ar: "راسلنا في أي وقت:",
           },
-          value: socialData?.gmail_account,
+          value: socialData?.official_email,
         },
       ]);
 
@@ -97,49 +99,6 @@ export default function Navbar({ socialData }: props) {
         {
           icon: FaTiktok,
           href: socialData.tiktok_account,
-        },
-      ]);
-    } else {
-      setCurrentDetailes([
-        {
-          title: {
-            en: "Locate Address:",
-            ar: "العنوان:",
-          },
-          value: "Damascus, Syria - Al-Mazzeh",
-        },
-        {
-          title: {
-            en: "Call us any time:",
-            ar: "اتصل بنا في أي وقت:",
-          },
-          value: "+963 944 123 456",
-        },
-        {
-          title: {
-            en: "Email us any time:",
-            ar: "راسلنا في أي وقت:",
-          },
-          value: "info@hewar-peace.org",
-        },
-      ]);
-
-      setSocialIcons([
-        {
-          icon: FaFacebook,
-          href: "#",
-        },
-        {
-          icon: FaYoutube,
-          href: "#",
-        },
-        {
-          icon: FaLinkedin,
-          href: "#",
-        },
-        {
-          icon: FaTiktok,
-          href: "#",
         },
       ]);
     }
@@ -164,7 +123,7 @@ export default function Navbar({ socialData }: props) {
                 className=" items-center justify-between mx-auto py-2 w-fit hidden lg:flex lg:w-full"
               >
                 {/* logo */}
-                <LocaleLink href="/">
+                <LocaleLink className="shrink-0" href="/">
                   <Img
                     src={logoSrc ?? "/logo.png"}
                     className="w-16 hidden lg:block"
@@ -181,7 +140,7 @@ export default function Navbar({ socialData }: props) {
                       <p className="text-gray-600 text-sm">
                         {item.title[locale]}
                       </p>
-                      <h3 className="font-semibold text-xl xl:text-2xl">
+                      <h3 className="font-semibold text-lg xl:text-xl 2xl:text-2xl">
                         {item.value}
                       </h3>
                     </div>

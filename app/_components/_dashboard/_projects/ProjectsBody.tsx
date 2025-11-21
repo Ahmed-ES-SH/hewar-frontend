@@ -95,7 +95,7 @@ export default function ProjectsBody({ data, pagination, categories }: Props) {
   ]);
 
   return (
-    <div className="w-full flex items-start gap-3">
+    <div className="w-full flex items-start max-md:flex-col-reverse gap-3">
       <div className="lg:flex-1/2 max-lg:w-full">
         {projects && projects.length > 0 ? (
           <div className="min-h-screen  w-full">

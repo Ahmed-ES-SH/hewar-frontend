@@ -7,6 +7,7 @@ import { FiHelpCircle, FiMail, FiMapPin, FiPhone } from "react-icons/fi";
 import { useTranslation } from "@/app/_hooks/useTranslation";
 import { CenterBranchType } from "./CenterBranchesComponent";
 import { truncateContent } from "@/app/_helpers/GlobalHelpers";
+import { MdOutlineTitle } from "react-icons/md";
 
 interface props {
   branch: CenterBranchType;
@@ -40,6 +41,13 @@ export default function CenterBranch({ branch }: props) {
             <div className="flex items-center justify-between max-lg:flex-col max-lg:items-start w-full pb-4  gap-4">
               {/* Contact Info Cards */}
               <div className="space-y-6 flex-1">
+                <ContactInfoCard
+                  icon={<MdOutlineTitle size={24} />}
+                  title={translations.branchName || "اسم الفرع"}
+                  value={branch.title}
+                  delay={0}
+                />
+
                 <ContactInfoCard
                   icon={<FiMapPin size={24} />}
                   title={translations.address}

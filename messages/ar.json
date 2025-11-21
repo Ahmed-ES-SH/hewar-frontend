@@ -212,6 +212,7 @@
     "phone": "الهاتف",
     "phoneValue": "+1 (555) 123-4567",
     "email": "البريد الإلكتروني",
+    "branchName": "اسم الفرع",
     "emailValue": "hello@company.com",
     "haveQuestions": "هل لديك أسئلة؟",
     "haveQuestionsDesc": "نحن هنا للمساعدة. تواصل معنا في أي وقت.",

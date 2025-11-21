@@ -245,13 +245,7 @@ const VideoPopup = ({
 }: VideoPopupProps) => {
   const [thumbnail, setThumbnail] = useState<string | File | null>(imgSrc);
   const [video, setVideo] = useState<string | File | null>(videoPath);
-  const [activeTab, setActiveTab] = useState<"youtube" | "upload">(
-    videoPath &&
-      typeof videoPath === "string" &&
-      (videoPath.includes("youtube.com") || videoPath.includes("youtu.be"))
-      ? "youtube"
-      : "upload"
-  );
+  const [activeTab, setActiveTab] = useState<"youtube" | "upload">("youtube");
 
   // إعادة تعيين الحالة عند فتح الـ popup
   useEffect(() => {
@@ -362,18 +356,6 @@ const VideoPopup = ({
                   >
                     <FiYoutube className="inline-block ml-1" />
                     يوتيوب
-                  </button>
-                  <button
-                    type="button"
-                    className={`flex-1 py-2 text-center font-medium ${
-                      activeTab === "upload"
-                        ? "text-blue-600 border-b-2 border-blue-600"
-                        : "text-gray-500 hover:text-gray-700"
-                    } transition-colors duration-200`}
-                    onClick={() => setActiveTab("upload")}
-                  >
-                    <FiUpload className="inline-block ml-1" />
-                    رفع فيديو
                   </button>
                 </div>
 

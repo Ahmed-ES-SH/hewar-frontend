@@ -27,7 +27,7 @@ export default function BottomNavbar({ hideWhitePart }: props) {
     <div
       className={`md:c-container overflow-hidden w-full rounded-full  md:absolute ${
         !hideWhitePart ? "md:top-[95%]" : "md:top-1/2"
-      } md:left-1/2 md:-translate-x-1/2 flex items-start justify-between gap-2`}
+      } md:left-1/2 md:-translate-x-1/2 flex items-center justify-between gap-2`}
     >
       <div className="flex items-center justify-between md:bg-primary-color lg:py-4 flex-1/2 rounded-full gap-4 md:p-4">
         <div className="flex items-center gap-2 md:hidden">
@@ -35,12 +35,12 @@ export default function BottomNavbar({ hideWhitePart }: props) {
           <MobileDropLinks />
           {/* logo small screen */}
           <LocaleLink className="md:hidden" href="/">
-            <Img src={logoSrc ?? "/logo.png"} className="w-12 md:hidden" />
+            <Img src={logoSrc ?? "/logo.png"} className="w-14 md:hidden" />
           </LocaleLink>
         </div>
 
         {/* current links desktop */}
-        <div className="md:flex shrink-0 hidden items-center self-start gap-4">
+        <div className="md:flex  hidden items-center self-start gap-4">
           {links.map((link, index) => {
             const isActive = link.href !== "/" && pathName.includes(link.href);
             return (
@@ -62,11 +62,11 @@ export default function BottomNavbar({ hideWhitePart }: props) {
           {navText[locale] ?? ""}
         </p>
       </div>
-      <div className="flex items-center gap-2">
+      <div className="flex items-center shrink-0 gap-2">
         {/* button */}
         <button
           onClick={donateNow}
-          className="relative hidden  whitespace-nowrap max-md:text-sm group overflow-hidden bg-transparent hover:bg-primary duration-200 text-white py-2 md:py-4 px-4 md:px-8 rounded-full md:flex items-center justify-center"
+          className="relative hidden lg:flex whitespace-nowrap max-md:text-sm group overflow-hidden bg-transparent hover:bg-primary duration-200 text-white py-2 md:py-4 px-4 md:px-8 rounded-full  items-center justify-center"
         >
           <div className="flex items-center gap-2 relative order-1">
             <IoMdHeart />

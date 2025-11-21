@@ -39,7 +39,14 @@ export interface Project {
   location: ProjectLocation | null;
   start_date: string;
   completed_at: string;
-  status: "pending" | "in_progress" | "completed" | "canceled";
+  status:
+    | "pending"
+    | "in_progress"
+    | "completed"
+    | "approved"
+    | "canceled"
+    | "draft"
+    | "rejected";
   target_amount: string;
   collected_amount: string;
   is_urgent: boolean;
